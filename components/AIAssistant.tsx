@@ -142,14 +142,7 @@ const AIAssistant: React.FC<AIAssistantProps> = ({ lang, t }) => {
               
               <div className="px-5 py-4 md:px-10 md:py-10 border-b border-brand-black/5 flex items-center justify-between bg-white/40">
                 <div className="flex items-center gap-3 md:gap-5">
-                  <div className="relative">
-                    <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-brand-black flex items-center justify-center text-white text-[9px] md:text-[11px] font-bold shadow-2xl">OX</div>
-                    <div className="absolute -bottom-1 -right-1 w-2 md:w-3 h-2 md:h-3 bg-green-500 rounded-full border-2 border-white"></div>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-[10px] md:text-sm font-bold tracking-tight uppercase">OX Expert</span>
-                    <span className="text-[6px] md:text-[8px] font-mono font-bold text-brand-black/30 uppercase tracking-[0.2em]">Encrypted</span>
-                  </div>
+                  {/* Header labels removed as requested */}
                 </div>
                 <div className="px-2.5 py-0.5 md:px-3 md:py-1 bg-brand-gold/10 rounded-full text-[6px] md:text-[8px] font-bold text-brand-gold uppercase tracking-widest">Live</div>
               </div>
