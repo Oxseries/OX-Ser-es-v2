@@ -28,7 +28,6 @@ const Navbar: React.FC<NavbarProps> = ({ lang, setLang, isScrolled, t }) => {
   const navItems = [
     { key: 'collection', id: 'product' },
     { key: 'ritual', id: 'ritual' },
-    { key: 'expert', id: 'ai' },
     { key: 'stores', id: 'stores' }
   ];
 

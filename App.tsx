@@ -5,7 +5,6 @@ import { TRANSLATIONS } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Ritual from './components/Ritual';
-import AIAssistant from './components/AIAssistant';
 import PharmacyLocator from './components/PharmacyLocator';
 import Footer from './components/Footer';
 import AdvantageModal from './components/AdvantageModal';
@@ -48,23 +47,10 @@ const App: React.FC = () => {
         <Hero t={t} lang={lang} />
         <Ritual t={t} />
         <ApplicationRequest t={t} />
-        <AIAssistant lang={lang} t={t} />
         <PharmacyLocator t={t} lang={lang} />
       </main>
 
       <Footer t={t} />
-
-      {/* SOS Button */}
-      <button 
-        onClick={() => {
-          const element = document.getElementById('ai');
-          element?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        aria-label="SOS Help"
-        className="fixed bottom-6 left-6 w-14 h-14 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center font-bold tracking-widest hover:scale-110 active:scale-95 transition-all z-40 border border-white/20 animate-pulse will-change-transform"
-      >
-        SOS
-      </button>
 
       {/* Floating Action Button */}
       <button 

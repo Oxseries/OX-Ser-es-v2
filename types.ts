@@ -23,8 +23,3 @@ export interface AdvantageProduct {
   description: string;
   detailedDescription?: string;
 }
-
-export interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-}
