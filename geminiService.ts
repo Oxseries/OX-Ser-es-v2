@@ -2,11 +2,29 @@
 import { GoogleGenAI } from "@google/genai";
 import { Message } from "./types";
 
-// Always use named parameter and process.env.API_KEY directly as per guidelines
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization to prevent crash if API key is missing
+let aiInstance: any = null;
+
+const getAI = () => {
+  if (!aiInstance) {
+    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.warn("Gemini API Key is missing. AI features will not work.");
+      return null;
+    }
+    aiInstance = new GoogleGenAI({ apiKey });
+  }
+  return aiInstance;
+};
 
 export const getSkincareAdvice = async (history: Message[], language: 'tr' | 'en') => {
-  // Use ai.models.generateContent directly with model and contents as per guidelines
+  const ai = getAI();
+  if (!ai) {
+    return language === 'tr' 
+      ? "Üzgünüm, şu anda AI asistanına bağlanılamıyor. Lütfen daha sonra tekrar deneyin."
+      : "I'm sorry, I cannot connect to the AI assistant right now. Please try again later.";
+  }
+
   const response = await ai.models.generateContent({
     model: "gemini-3-flash-preview",
     contents: history.map(m => ({
