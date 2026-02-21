@@ -1,13 +1,6 @@
 
 export type Language = 'tr' | 'en';
 
-export interface Ingredient {
-  name: string;
-  concentration: string;
-  description: string;
-  origin: string;
-}
-
 export interface Pharmacy {
   name: string;
   distance: string;

@@ -5,7 +5,6 @@ import { TRANSLATIONS } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Ritual from './components/Ritual';
-import Ingredients from './components/Ingredients';
 import AIAssistant from './components/AIAssistant';
 import PharmacyLocator from './components/PharmacyLocator';
 import Footer from './components/Footer';
@@ -48,7 +47,6 @@ const App: React.FC = () => {
       <main>
         <Hero t={t} lang={lang} />
         <Ritual t={t} />
-        <Ingredients t={t} lang={lang} />
         <ApplicationRequest t={t} />
         <AIAssistant lang={lang} t={t} />
         <PharmacyLocator t={t} lang={lang} />

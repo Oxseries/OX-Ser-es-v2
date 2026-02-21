@@ -1,10 +1,9 @@
-import { Ingredient, AdvantageProduct, Pharmacy } from './types';
+import { AdvantageProduct, Pharmacy } from './types';
 
 export const TRANSLATIONS = {
   tr: {
     nav_collection: 'Koleksiyon',
     nav_ritual: 'Ritüel',
-    nav_ingredients: 'İçerikler',
     nav_expert: 'Uzman',
     nav_stores: 'Mağazalar',
     hero_badge: 'Premium Cilt Bakımı',
@@ -31,8 +30,6 @@ export const TRANSLATIONS = {
     ritual_footer_tagline: 'Onaylı Formül • Laboratuvar Testli • OX Premium Standartları',
     ritual_current_focus: 'Güncel Odak Noktası',
     ritual_touch_future: 'Geleceğe Dokunun',
-    ingredients_title: 'Formül İçerikleri',
-    ingredients_subtitle: 'OX SERIES formülasyonu, her damlada doğanın en saf hallerini ve bilimin en yeni keşiflerini cildinizle buluşturur.',
     expert_title: 'OX Cilt Bakım Uzmanı',
     expert_badge: 'Geleceğe Dokun',
     ai_greeting: 'Merhaba! Ben OX Serum asistanı. Cilt tipinize özel ürün önerileri ve kullanım tavsiyeleri verebilirim.',
@@ -116,7 +113,6 @@ export const TRANSLATIONS = {
   en: {
     nav_collection: 'Collection',
     nav_ritual: 'Ritual',
-    nav_ingredients: 'Ingredients',
     nav_expert: 'Expert',
     nav_stores: 'Stores',
     hero_badge: 'Premium Skincare',
@@ -143,8 +139,6 @@ export const TRANSLATIONS = {
     ritual_footer_tagline: 'Certified Formula • Laboratory Tested • OX Premium Standards',
     ritual_current_focus: 'Current Focus',
     ritual_touch_future: 'Touch the Future',
-    ingredients_title: 'Formula Ingredients',
-    ingredients_subtitle: 'OX SERIES formulation brings the purest forms of nature and latest scientific discoveries to your skin.',
     expert_title: 'OX Skincare Expert',
     expert_badge: 'Touch the Future',
     ai_greeting: 'Hello! I\'m the OX Serum assistant. I can provide personalized product recommendations and usage advice based on your skin type.',
@@ -251,52 +245,6 @@ export const AUTHORIZED_PHARMACIES: Pharmacy[] = [
     lng: 27.1394 
   }
 ];
-
-export const INGREDIENTS_SERUM_TR: Ingredient[] = [
-  { name: 'Hidrolize Kolajen', concentration: 'Ana', description: 'Cilt elastikiyetini artıran ve kırışıklıkları azaltan güçlü protein kompleksi.', origin: 'Sığır Kaynaklı' },
-  { name: 'Ayçiçek Çekirdeği Yağı', concentration: 'Aktif', description: 'Cildi doğal yollarla besleyen, yumuşatan ve nemlendiren yağ.', origin: 'Bitkisel' },
-  { name: 'Vişne Çekirdeği Yağı', concentration: 'Aktif', description: 'Antioksidan özellikleri ile cildi dış etkenlere karşı korur.', origin: 'Bitkisel' },
-  { name: 'Ranunculus Ficaria Özü', concentration: 'Aktif', description: 'Kan dolaşımını düzenlemeye yardımcı olan doğal ekstrakt.', origin: 'Bitkisel' },
-  { name: 'Avokado Yağı', concentration: 'Aktif', description: 'Derinlemesine besleyici. A, D ve E vitaminleri bakımından zengindir.', origin: 'Bitkisel' },
-  { name: 'Pantenol B5', concentration: 'B5', description: 'Pro-vitamin B5, cildi nemlendirir ve iyileşme sürecini destekler.', origin: 'Vitamin' },
-  { name: 'Resveratrol', concentration: 'Aktif', description: 'Üzümde bulunan doğal antioksidan. Genç görünümü destekler.', origin: 'Bitkisel' }
-];
-
-export const INGREDIENTS_VEGAN_SERUM_TR: Ingredient[] = [
-  { name: 'Helianthus Annuus Seed Oil', concentration: 'Aktif', description: 'Ayçiçek yağı. Cildi nemlendirir ve E vitamini açısından zengindir.', origin: 'Bitkisel' },
-  { name: 'Prunus Cerasus Seed Oil', concentration: 'Aktif', description: 'Vişne çekirdeği yağı. Antioksidan özelliklere sahiptir.', origin: 'Bitkisel' },
-  { name: 'Persea Gratissima Oil', concentration: 'Aktif', description: 'Avokado yağı. Çok besleyicidir, kuru ciltler için idealdir.', origin: 'Bitkisel' },
-  { name: 'Cyclopentasiloxane', concentration: 'Doku', description: 'Ciltte ipeksi bir his bırakmasını ve kolay yayılmasını sağlar.', origin: 'Sentetik' },
-  { name: 'Tocopheryl Acetate', concentration: 'Vitamin', description: 'E vitamini türevidir. Cildi dış etkenlere karşı koruyan güçlü bir antioksidandır.', origin: 'Vitamin' },
-  { name: 'Panthenol', concentration: 'B5', description: 'Cildi onarır, nem tutma kapasitesini artırır ve yatıştırır.', origin: 'Vitamin' },
-  { name: 'Caprylic/Capric Triglyceride', concentration: 'Pürüzsüzleştirici', description: 'Hindistan cevizi yağı ve gliserinden elde edilen, cildi pürüzsüzleştiren madde.', origin: 'Bitkisel' },
-  { name: 'Lavandula Angustifolia Oil', concentration: 'Yatıştırıcı', description: 'Lavanta yağı. Yatıştırıcı etkisi ve hoş kokusu için eklenir.', origin: 'Bitkisel' },
-  { name: 'Ranunculus Ficaria Extract', concentration: 'Aktif', description: 'Basur otu özü. Yatıştırıcı ve damar büzücü özellikler.', origin: 'Bitkisel' }
-];
-
-export const INGREDIENTS_SERUM_EN: Ingredient[] = [
-  { name: 'Hydrolyzed Collagen', concentration: 'Main', description: 'Powerful protein complex that increases skin elasticity and reduces wrinkles.', origin: 'Bovine source' },
-  { name: 'Sunflower Seed Oil', concentration: 'Active', description: 'Nourishes, softens, and hydrates naturally.', origin: 'Plant-based' },
-  { name: 'Cherry Seed Oil', concentration: 'Active', description: 'Protects skin with antioxidant properties.', origin: 'Plant-based' },
-  { name: 'Ranunculus Ficaria Extract', concentration: 'Active', description: 'Helps improve blood circulation.', origin: 'Plant-based' },
-  { name: 'Avocado Oil', concentration: 'Active', description: 'Deeply nourishes. Rich in Vitamins A, D, and E.', origin: 'Plant-based' },
-  { name: 'Panthenol B5', concentration: 'B5', description: 'Pro-vitamin B5 moisturizes and supports the healing process.', origin: 'Vitamin' },
-  { name: 'Resveratrol', concentration: 'Active', description: 'Natural antioxidant found in grapes. Supports youthfulness.', origin: 'Plant-based' }
-];
-
-export const INGREDIENTS_CLEANSER_TR: Ingredient[] = [
-  { name: 'Sodyum Hyaluronat', concentration: 'Nem', description: 'Cildi kurutmadan temizleyen yoğun nem çekici.', origin: 'Laboratuvar' },
-  { name: 'Aloe Vera Özü', concentration: 'Sakinlik', description: 'Temizlik sırasında cildi yatıştıran doğal bileşen.', origin: 'Bitkisel' }
-];
-
-export const INGREDIENTS_MOISTURIZER_TR: Ingredient[] = [
-  { name: 'Seramid Kompleksi', concentration: 'Bariyer', description: 'Cilt bariyerini güçlendiren yapısal yağlar.', origin: 'Biyoteknoloji' },
-  { name: 'Niasinamid', concentration: 'Vitamin', description: 'Cilt tonunu düzenleyen ve gözenekleri küçülten B3 vitamini.', origin: 'Vitamin' }
-];
-
-// For backward compatibility and the main Ingredients section
-export const INGREDIENTS_TR = INGREDIENTS_SERUM_TR;
-export const INGREDIENTS_EN = INGREDIENTS_SERUM_EN;
 
 export const ADVANTAGE_PRODUCTS: AdvantageProduct[] = [
   { 
