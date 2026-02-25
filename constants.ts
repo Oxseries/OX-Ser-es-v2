@@ -4,6 +4,7 @@ export const TRANSLATIONS = {
   tr: {
     nav_collection: 'Koleksiyon',
     nav_ritual: 'Ritüel',
+    nav_technical_sheet: 'Teknik Belge',
     nav_stores: 'Mağazalar',
     hero_badge: 'Premium Cilt Bakımı',
     hero_title: 'Cildinizi Yeniden Keşfedin',
@@ -98,11 +99,15 @@ export const TRANSLATIONS = {
     role_pharmacist: 'Eczacı',
     role_assistant: 'Eczacı Kalfası',
     label_quantity: 'Adet',
-    label_mf: 'MF'
+    label_mf: 'MF',
+    technical_sheet_title: 'Technical Sheet',
+    technical_sheet_formula: 'Formula Ox Series',
+    technical_sheet_product: 'Collagen Peeling'
   },
   en: {
     nav_collection: 'Collection',
     nav_ritual: 'Ritual',
+    nav_technical_sheet: 'Technical Sheet',
     nav_stores: 'Stores',
     hero_badge: 'Premium Skincare',
     hero_title: 'Rediscover Your Skin',
@@ -197,7 +202,10 @@ export const TRANSLATIONS = {
     role_pharmacist: 'Pharmacist',
     role_assistant: 'Pharmacy Assistant',
     label_quantity: 'QTY',
-    label_mf: 'MF'
+    label_mf: 'MF',
+    technical_sheet_title: 'Technical Sheet',
+    technical_sheet_formula: 'Formula Ox Series',
+    technical_sheet_product: 'Collagen Peeling'
   }
 };
 
