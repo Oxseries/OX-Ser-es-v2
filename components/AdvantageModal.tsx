@@ -26,10 +26,7 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
   const [isLocating, setIsLocating] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [productQuantities, setProductQuantities] = useState<Record<number, number>>({});
-
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleVerify = () => {
     if (password.toLowerCase() === 'ox') {
@@ -48,28 +45,6 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
     if (qty >= 10) return 2;
     return 0;
   };
-
-  const updateScrollProgress = () => {
-    if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      const totalScroll = scrollWidth - clientWidth;
-      if (totalScroll > 0) {
-        const progress = (scrollLeft / totalScroll) * 100;
-        setScrollProgress(progress);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isVerified) {
-      const el = scrollRef.current;
-      if (el) {
-        el.addEventListener('scroll', updateScrollProgress, { passive: true });
-        updateScrollProgress();
-        return () => el.removeEventListener('scroll', updateScrollProgress);
-      }
-    }
-  }, [isVerified]);
 
   const sendToTelegram = async (message: string) => {
     try {
@@ -267,16 +242,16 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
               </button>
             </div>
 
-            <div className="relative flex-1">
+            <div className="relative flex-1 max-w-3xl mx-auto w-full">
               <div 
-                ref={scrollRef}
-                className="flex gap-10 md:gap-16 lg:gap-20 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-24 -mx-8 px-8 md:mx-0 md:px-0"
+                className="flex flex-col gap-16 md:gap-24 pb-32"
               >
                 {ADVANTAGE_PRODUCTS.map((prod, i) => (
-                  <div 
-                    key={i} 
-                    className="flex-shrink-0 w-[85vw] md:w-[500px] snap-center bg-white border border-brand-border rounded-[4rem] overflow-hidden hover:shadow-2xl transition-all duration-700 flex flex-col group"
-                  >
+                    <div 
+                      key={i} 
+                      className="w-full bg-white border border-brand-border rounded-[4rem] overflow-hidden hover:shadow-2xl transition-all duration-700 flex flex-col group animate-float"
+                      style={{ animationDelay: `${i * 0.5}s` }}
+                    >
                     <div className="aspect-square bg-brand-gray relative overflow-hidden">
                       <img 
                         src={prod.image} 
@@ -309,9 +284,43 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
                            </div>
                            <div className="space-y-1">
                               <span className="text-[10px] font-bold uppercase tracking-widest opacity-20">{t('profit')}</span>
-                              <p className="text-xl font-header font-bold text-green-600">+{prod.profit}</p>
+                              <p className="text-xl font-header font-bold text-green-600">{prod.profit}</p>
                            </div>
                         </div>
+
+                        {prod.technicalSheet && (
+                          <div className="mt-10 pt-8 border-t border-brand-border/40 space-y-6 animate-fade-up">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold">Technical Sheet</span>
+                              <div className="flex gap-2">
+                                <span className="px-2 py-0.5 bg-brand-black text-white text-[8px] font-bold rounded-full">OX SERIES</span>
+                                <span className="px-2 py-0.5 bg-brand-gold text-white text-[8px] font-bold rounded-full">VERIFIED FORMULA</span>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="bg-brand-gray/50 p-4 rounded-2xl">
+                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-30 block mb-1">Batch</span>
+                                <span className="text-xs font-bold">{prod.technicalSheet.batch}</span>
+                              </div>
+                              <div className="bg-brand-gray/50 p-4 rounded-2xl">
+                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-30 block mb-1">Origin</span>
+                                <span className="text-xs font-bold">{prod.technicalSheet.origin}</span>
+                              </div>
+                              <div className="bg-brand-gray/50 p-4 rounded-2xl">
+                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-30 block mb-1">Status</span>
+                                <span className="text-xs font-bold text-green-600">{prod.technicalSheet.status}</span>
+                              </div>
+                              <div className="bg-brand-gray/50 p-4 rounded-2xl">
+                                <span className="text-[8px] font-bold uppercase tracking-widest opacity-30 block mb-1">Type</span>
+                                <span className="text-xs font-bold">{prod.technicalSheet.type}</span>
+                              </div>
+                            </div>
+                            <div className="text-center py-2 space-y-1">
+                               <p className="text-[10px] font-black uppercase tracking-widest text-brand-black">{prod.technicalSheet.formula}</p>
+                               <p className="text-[8px] font-bold uppercase tracking-widest text-brand-black/40">{prod.technicalSheet.productName}</p>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       {/* Prominent Bottom Section for Quantity and MF */}
@@ -338,13 +347,6 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
                 ))}
               </div>
             </div>
-
-            <div className="w-full max-w-sm mx-auto h-1 bg-brand-gray rounded-full overflow-hidden mt-12 mb-10">
-              <div 
-                className="h-full bg-brand-black transition-all duration-300" 
-                style={{ width: `${scrollProgress}%` }}
-              ></div>
-            </div>
           </div>
         )}
       </div>
@@ -353,6 +355,12 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #0A0A0A; border-radius: 10px; }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float { animation: float 8s ease-in-out infinite; }
+        .animate-float:hover { animation-play-state: paused; }
         @keyframes shake {
           0%, 100% { transform: translateX(0); }
           20%, 60% { transform: translateX(-10px); }

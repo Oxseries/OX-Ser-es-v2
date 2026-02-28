@@ -22,4 +22,12 @@ export interface AdvantageProduct {
   sku?: string;
   description: string;
   detailedDescription?: string;
+  technicalSheet?: {
+    batch: string;
+    origin: string;
+    status: string;
+    type: string;
+    formula: string;
+    productName: string;
+  };
 }
