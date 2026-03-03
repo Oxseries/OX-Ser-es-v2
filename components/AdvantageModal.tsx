@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ADVANTAGE_PRODUCTS } from '../constants';
 import { Language } from '../types';
 
@@ -250,7 +250,7 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
                     <div 
                       key={i} 
                       className="w-full bg-white border border-brand-border rounded-[4rem] overflow-hidden hover:shadow-2xl transition-all duration-700 flex flex-col group animate-float"
-                      style={{ animationDelay: `${i * 0.5}s` }}
+                      style={{ animationDelay: `${i * 1.2}s`, animationDuration: `${7 + (i % 3)}s` }}
                     >
                     <div className="aspect-square bg-brand-gray relative overflow-hidden">
                       <img 
