@@ -27,6 +27,18 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [productQuantities, setProductQuantities] = useState<Record<number, number>>({});
+  const [cart, setCart] = useState<Record<number, number>>({});
+
+  const handleAddToCart = (index: number) => {
+    const qty = productQuantities[index] || 0;
+    if (qty > 0) {
+      setCart(prev => ({
+        ...prev,
+        [index]: (prev[index] || 0) + qty
+      }));
+      setProductQuantities(prev => ({ ...prev, [index]: 0 }));
+    }
+  };
 
   const handleVerify = () => {
     if (password.toLowerCase() === 'ox') {
@@ -234,12 +246,20 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
                   {lang === 'tr' ? 'BAYİ MARJI: %60' : 'PARTNER MARGIN: %60'}
                 </div>
               </div>
-              <button 
-                onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
-                className="px-6 py-2 bg-brand-gray rounded-full text-[10px] font-black uppercase tracking-widest"
-              >
-                {lang === 'tr' ? 'ENGLISH' : 'TÜRKÇE'}
-              </button>
+              <div className="flex items-center gap-4">
+                {(Object.values(cart) as number[]).reduce((a, b) => a + b, 0) > 0 && (
+                  <div className="px-6 py-2 bg-brand-gold text-white rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-2 animate-fade-in shadow-lg">
+                    <span className="text-sm">🛒</span>
+                    <span>{(Object.values(cart) as number[]).reduce((a, b) => a + b, 0)} {lang === 'tr' ? 'Ürün' : 'Items'}</span>
+                  </div>
+                )}
+                <button 
+                  onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
+                  className="px-6 py-2 bg-brand-gray rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-brand-black hover:text-white transition-colors"
+                >
+                  {lang === 'tr' ? 'ENGLISH' : 'TÜRKÇE'}
+                </button>
+              </div>
             </div>
 
             <div className="relative flex-1 max-w-3xl mx-auto w-full">
@@ -324,23 +344,36 @@ const AdvantageModal: React.FC<AdvantageModalProps> = ({ isOpen, onClose, t, lan
                       </div>
 
                       {/* Prominent Bottom Section for Quantity and MF */}
-                      <div className="mt-12 pt-8 border-t border-brand-border flex gap-4 md:gap-6 items-stretch">
-                        <div className="flex-1 space-y-3">
-                          <label className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-brand-black/30 block ml-2">{t('label_quantity')}</label>
-                          <input 
-                            type="number"
-                            placeholder="0"
-                            value={productQuantities[i] || ''}
-                            onChange={(e) => setProductQuantities({ ...productQuantities, [i]: parseInt(e.target.value) || 0 })}
-                            className="w-full bg-brand-gray rounded-[1.5rem] px-4 md:px-6 py-5 text-center text-xl font-black focus:outline-none focus:border-brand-gold border-2 border-brand-border transition-all duration-300"
-                          />
-                        </div>
-                        <div className="flex-1 space-y-3">
-                          <label className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-brand-black/30 block ml-2">{t('label_mf')}</label>
-                          <div className={`w-full py-5 rounded-[1.5rem] flex items-center justify-center font-header text-3xl font-black transition-all duration-500 border-2 ${calculateMF(productQuantities[i] || 0) > 0 ? 'bg-brand-black text-brand-gold border-brand-black' : 'bg-brand-gray text-brand-black/10 border-brand-border'}`}>
-                            {calculateMF(productQuantities[i] || 0)}
+                      <div className="mt-12 pt-8 border-t border-brand-border flex flex-col gap-6">
+                        <div className="flex gap-4 md:gap-6 items-stretch">
+                          <div className="flex-1 space-y-3">
+                            <label className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-brand-black/30 block ml-2">{t('label_quantity')}</label>
+                            <input 
+                              type="number"
+                              placeholder="0"
+                              value={productQuantities[i] || ''}
+                              onChange={(e) => setProductQuantities({ ...productQuantities, [i]: parseInt(e.target.value) || 0 })}
+                              className="w-full bg-brand-gray rounded-[1.5rem] px-4 md:px-6 py-5 text-center text-xl font-black focus:outline-none focus:border-brand-gold border-2 border-brand-border transition-all duration-300"
+                            />
+                          </div>
+                          <div className="flex-1 space-y-3">
+                            <label className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-brand-black/30 block ml-2">{t('label_mf')}</label>
+                            <div className={`w-full py-5 rounded-[1.5rem] flex items-center justify-center font-header text-3xl font-black transition-all duration-500 border-2 ${calculateMF(productQuantities[i] || 0) > 0 ? 'bg-brand-black text-brand-gold border-brand-black' : 'bg-brand-gray text-brand-black/10 border-brand-border'}`}>
+                              {calculateMF(productQuantities[i] || 0)}
+                            </div>
                           </div>
                         </div>
+                        <button
+                          onClick={() => handleAddToCart(i)}
+                          disabled={!(productQuantities[i] > 0)}
+                          className={`w-full py-5 rounded-[1.5rem] font-black uppercase tracking-[0.2em] text-sm transition-all duration-300 ${
+                            (productQuantities[i] || 0) > 0
+                              ? 'bg-brand-black text-white hover:bg-brand-gold shadow-xl'
+                              : 'bg-brand-gray text-brand-black/20 cursor-not-allowed'
+                          }`}
+                        >
+                          {lang === 'tr' ? 'Sepete Ekle' : 'Add to Cart'}
+                        </button>
                       </div>
                     </div>
                   </div>
